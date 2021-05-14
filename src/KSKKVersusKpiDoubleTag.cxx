@@ -47,11 +47,11 @@ StatusCode KSKKVersusKpiDoubleTag::initialize() {
   MsgStream log(msgSvc(), name());
   log << MSG::INFO << "Initializing KSKK vs Kpi Double Tagging" << endreq;
   StatusCode status;
-  NTuplePtr ntp(ntupleSvc(), "KPISTRONGPHASE/KpiDoubleTag");
+  NTuplePtr ntp(ntupleSvc(), "KPISTRONGPHASE/KSKKVersusKpiDoubleTag");
   if(ntp) {
     m_tuple = ntp;
   } else {
-    m_tuple = ntupleSvc()->book("KPISTRONGPHASE/KpiDoubleTag", CLID_ColumnWiseTuple, "Double tagged D->KSKK vs D->Kpi events");
+    m_tuple = ntupleSvc()->book("KPISTRONGPHASE/KSKKVersusKpiDoubleTag", CLID_ColumnWiseTuple, "Double tagged D->KSKK vs D->Kpi events");
     if(m_tuple) {
       status = m_tuple->addItem("Run", m_RunNumber);
       status = m_tuple->addItem("Event", m_EventNumber);
