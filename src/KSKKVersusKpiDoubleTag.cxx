@@ -126,8 +126,8 @@ StatusCode KSKKVersusKpiDoubleTag::initialize() {
       status = m_tuple->addItem("SignalPIDTrue", m_SignalPIDTrue);
       status = m_tuple->addItem("SignalKSPiPlusTrueID", m_SignalKSPiPlusTrueID);
       status = m_tuple->addItem("SignalKSPiMinusTrueID", m_SignalKSPiMinusTrueID);
-      status = m_tuple->addItem("SignalPiPlusTrueID", m_SignalPiPlusTrueID);
-      status = m_tuple->addItem("SignalPiMinusTrueID", m_SignalPiMinusTrueID);
+      status = m_tuple->addItem("SignalKPlusTrueID", m_SignalKPlusTrueID);
+      status = m_tuple->addItem("SignalKMinusTrueID", m_SignalKMinusTrueID);
       status = m_tuple->addItem("SignalKSPiPlusMotherTrueID", m_SignalKSPiPlusMotherTrueID);
       status = m_tuple->addItem("SignalKSPiMinusMotherTrueID", m_SignalKSPiMinusMotherTrueID);
       status = m_tuple->addItem("TagPipx", m_TagPipx);
@@ -240,7 +240,7 @@ StatusCode KSKKVersusKpiDoubleTag::FillTuple(DTagToolIterator DTTool_Signal_iter
   m_TagDpz = (*DTTool_Tag_iter)->p4().z();
   m_TagDenergy = (*DTTool_Tag_iter)->p4().t();
   FindKSKKTagInfo findKSKKTagInfo;
-  status = findKSKKTagInfo.CalculateTagInfo(DTTool_Tag_iter, DTTool);
+  StatusCode status = findKSKKTagInfo.CalculateTagInfo(DTTool_Signal_iter, DTTool);
   if(status != StatusCode::SUCCESS) {
     return status;
   }
@@ -293,8 +293,8 @@ StatusCode KSKKVersusKpiDoubleTag::FillTuple(DTagToolIterator DTTool_Signal_iter
     m_SignalPIDTrue = PID_Truth.FindTrueID(ReconstructedPID) ? 1 : 0;
     m_SignalKSPiPlusTrueID = ReconstructedPID[0];
     m_SignalKSPiMinusTrueID = ReconstructedPID[1];
-    m_SignalPiPlusTrueID = ReconstructedPID[2];
-    m_SignalPiMinusTrueID = ReconstructedPID[3];
+    m_SignalKPlusTrueID = ReconstructedPID[2];
+    m_SignalKMinusTrueID = ReconstructedPID[3];
     m_SignalKSPiPlusMotherTrueID = PID_Truth.GetTrueMotherID(DaughterTrackIDs[0], true);
     m_SignalKSPiMinusMotherTrueID = PID_Truth.GetTrueMotherID(DaughterTrackIDs[1], true);
   }

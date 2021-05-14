@@ -20,7 +20,7 @@
 #include<vector>
 #include<string>
 // Particle masses
-#include "KpiStrongPhases/ParticleMasses.h"
+#include "KpiStrongPhase/ParticleMasses.h"
 
 FindKSKKTagInfo::FindKSKKTagInfo(): m_DaughterTrackID(std::vector<int>(4)), m_DecayLengthVeeVertex(0.0), m_Chi2VeeVertex(0.0), m_KSMassVeeVertex(0.0), m_DecayLengthFit(0.0), m_DecayLengthErrorFit(0.0), m_Chi2Fit(0.0), m_KalmanFitSuccess(0), m_KalmanFitChi2(0.0) {
 }

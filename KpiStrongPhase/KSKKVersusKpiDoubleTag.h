@@ -354,11 +354,11 @@ class KSKKVersusKpiDoubleTag: public Algorithm {
     /**
      * The signal \f$\pi^+\f$ true PID
      */
-    NTuple::Item<int> m_SignalPiPlusTrueID;
+    NTuple::Item<int> m_SignalKPlusTrueID;
     /**
      * The signal \f$\pi^-\f$ true PID
      */
-    NTuple::Item<int> m_SignalPiMinusTrueID;
+    NTuple::Item<int> m_SignalKMinusTrueID;
     /**
      * Signal \f$\pi^+\f$ from \f$K_S^0\f$ true mother PID
      */

@@ -26,7 +26,7 @@ StatusCode KpiStrongPhase::initialize() {
   log << MSG::INFO << "Creating KpiStrongPhase Double Tag Algorithm" << endreq;
   StatusCode sc;
   if(m_recKSKKVersusKpiTag) {
-    sc = createSubAlgorithm("KSKKVersusKpiDoubleTag", "KSKKVersusKpiDoubleTag", m_KKTag);
+    sc = createSubAlgorithm("KSKKVersusKpiDoubleTag", "KSKKVersusKpiDoubleTag", m_KSKKVersusKpiTag);
     if(sc.isFailure()) {
       log << MSG::ERROR << "Error while creating KSKKVersusKpiDoubleTag" << endreq;
       return StatusCode::FAILURE;

@@ -15,7 +15,7 @@
 // STL
 #include<vector>
 // Particle masses
-#include "KKpipi/ParticleMasses.h"
+#include "KpiStrongPhase/ParticleMasses.h"
 
 FindKpiTagInfo::FindKpiTagInfo(): m_DaughterTrackID(std::vector<int>(2)), m_KCharge(0), m_PiCharge(0) {
 }
