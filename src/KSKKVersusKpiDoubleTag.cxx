@@ -90,7 +90,7 @@ StatusCode KSKKVersusKpiDoubleTag::initialize() {
       status = m_tuple->addItem("SignalKSChi2Fit", m_SignalChi2Fit);
       status = m_tuple->addItem("SignalKSpx", m_SignalKSpx);
       status = m_tuple->addItem("SignalKSpy", m_SignalKSpy);
-      status = m_tuple->addItem("SignalKSz", m_SignalKSpz);
+      status = m_tuple->addItem("SignalKSpz", m_SignalKSpz);
       status = m_tuple->addItem("SignalKSenergy", m_SignalKSenergy);
       status = m_tuple->addItem("SignalKSPiPluspx", m_SignalKSPiPluspx);
       status = m_tuple->addItem("SignalKSPiPluspy", m_SignalKSPiPluspy);
