@@ -1,2 +1,18 @@
 package KpiStrongPhase
+author Martin Duy Tat <martin.tat@physics.ox.ac.uk>
 
+branches cmt src KpiStrongPhase share
+
+use BesAIDA          BesAIDA-*           External
+use BesPolicy        BesPolicy-01-*
+use GaudiInterface   GaudiInterface-01-* External
+use EventModel       EventModel-*        Event
+use EventNavigator   EventNavigator-*    Event
+use EmcRecEventModel EmcRecEventModel-*  Emc
+use EvtRecEvent      EvtRecEvent-*       Event
+use DTagTool         DTagTool-*          Analysis
+use VertexFit        VertexFit-*         Analysis
+use McDecayModeSvc   McDecayModeSvc-* 
+
+apply_pattern component_library
+library KpiStrongPhase *.cxx  components/*.cxx
