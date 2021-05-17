@@ -6,8 +6,8 @@
  * A kinematic fit of $K_S^0K^+K^-$ is done to get more accurate momenta for binning
  */
 
-#ifndef KSKKPIPIVERSUSKPIDOUBLETAG
-#define KSKKPIPIVERSUSKPIDOUBLETAG
+#ifndef KSKKPIPIVERSUSKPIPI0DOUBLETAG
+#define KSKKPIPIVERSUSKPIPI0DOUBLETAG
 
 // Gaudi
 #include "GaudiKernel/AlgFactory.h"
@@ -19,16 +19,16 @@
 // STL
 #include<string>
 
-class KSKKVersusKpiDoubleTag: public Algorithm {
+class KSKKVersusKpipi0DoubleTag: public Algorithm {
   public: 
     /**
      * Default constructor for an algorithm where all necessary properties are declared
      */
-    KSKKVersusKpiDoubleTag(const std::string& name, ISvcLocator* pSvcLocator);
+    KSKKVersusKpipi0DoubleTag(const std::string& name, ISvcLocator* pSvcLocator);
     /**
      * Trivial destructor
      */
-    ~KSKKVersusKpiDoubleTag();
+    ~KSKKVersusKpipi0DoubleTag();
     /**
      * This function runs when algorithm is initialized
      */

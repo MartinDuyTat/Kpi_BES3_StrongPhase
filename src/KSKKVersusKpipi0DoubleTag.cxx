@@ -1,7 +1,7 @@
 // Martin Duy Tat 5th March 2021
 
 // KpiStrongPhase
-#include "KpiStrongPhase/KSKKVersusKpiDoubleTag.h"
+#include "KpiStrongPhase/KSKKVersusKpipi0DoubleTag.h"
 #include "KpiStrongPhase/FindKSKKTagInfo.h"
 #include "KpiStrongPhase/FindKpiTagInfo.h"
 #include "KpiStrongPhase/FindMCInfo.h"
@@ -36,22 +36,22 @@
 #include<vector>
 #include<string>
 
-KSKKVersusKpiDoubleTag::KSKKVersusKpiDoubleTag(const std::string &name, ISvcLocator *pSvcLocator): Algorithm(name, pSvcLocator) {
+KSKKVersusKpipi0DoubleTag::KSKKVersusKpipi0DoubleTag(const std::string &name, ISvcLocator *pSvcLocator): Algorithm(name, pSvcLocator) {
   declareProperty("dummy", m_dummy = 0);
 }
 
-KSKKVersusKpiDoubleTag::~KSKKVersusKpiDoubleTag() {
+KSKKVersusKpipi0DoubleTag::~KSKKVersusKpipi0DoubleTag() {
 }
 
-StatusCode KSKKVersusKpiDoubleTag::initialize() {
+StatusCode KSKKVersusKpipi0DoubleTag::initialize() {
   MsgStream log(msgSvc(), name());
-  log << MSG::INFO << "Initializing KSKK vs Kpi Double Tagging" << endreq;
+  log << MSG::INFO << "Initializing KSKK vs Kpipi0 Double Tagging" << endreq;
   StatusCode status;
-  NTuplePtr ntp(ntupleSvc(), "KPISTRONGPHASE/KSKKVersusKpiDoubleTag");
+  NTuplePtr ntp(ntupleSvc(), "KPISTRONGPHASE/KSKKVersusKpipi0DoubleTag");
   if(ntp) {
     m_tuple = ntp;
   } else {
-    m_tuple = ntupleSvc()->book("KPISTRONGPHASE/KSKKVersusKpiDoubleTag", CLID_ColumnWiseTuple, "Double tagged D->KSKK vs D->Kpi events");
+    m_tuple = ntupleSvc()->book("KPISTRONGPHASE/KSKKVersusKpipi0DoubleTag", CLID_ColumnWiseTuple, "Double tagged D->KSKK vs D->Kpipi0 events");
     if(m_tuple) {
       status = m_tuple->addItem("Run", m_RunNumber);
       status = m_tuple->addItem("Event", m_EventNumber);
@@ -168,16 +168,16 @@ StatusCode KSKKVersusKpiDoubleTag::initialize() {
       status = m_tuple->addItem("TagHighEPi0PhotonMotherTrueID", m_TagHighEPi0PhotonMotherTrueID);
       status = m_tuple->addItem("TagLowEPi0PhotonMotherTrueID", m_TagLowEPi0PhotonMotherTrueID);
     } else {
-      log << MSG::ERROR << "Cannot book NTuple for KSKK vs Kpi Double Tags" << endmsg;
+      log << MSG::ERROR << "Cannot book NTuple for KSKK vs Kpipi0 Double Tags" << endmsg;
       return StatusCode::FAILURE;
     }
     return StatusCode::SUCCESS;
   }
 }
 
-StatusCode KSKKVersusKpiDoubleTag::execute() {
+StatusCode KSKKVersusKpipi0DoubleTag::execute() {
   MsgStream log(msgSvc(), name());
-  log << MSG::INFO << "Executing KSKK vs Kpi Double Tag Algorithm" << endreq;
+  log << MSG::INFO << "Executing KSKK vs Kpipi0 Double Tag Algorithm" << endreq;
   DTagTool DTTool;
   DTTool.setPID(true);
   if(DTTool.isDTagListEmpty()) {
@@ -200,7 +200,7 @@ StatusCode KSKKVersusKpiDoubleTag::execute() {
 	log << MSG::WARNING << "Vertex fit of KS failed, skipping event" << endreq;
 	return StatusCode::SUCCESS;
       }
-      log << MSG::FATAL << "Assigning KSKK vs Kpi tuple info failed" << endreq;
+      log << MSG::FATAL << "Assigning KSKK vs Kpipi0 tuple info failed" << endreq;
       return StatusCode::FAILURE;
     }
     m_tuple->write();
@@ -208,13 +208,13 @@ StatusCode KSKKVersusKpiDoubleTag::execute() {
   return StatusCode::SUCCESS;
 }
 
-StatusCode KSKKVersusKpiDoubleTag::finalize() {
+StatusCode KSKKVersusKpipi0DoubleTag::finalize() {
   MsgStream log(msgSvc(), name());
-  log << MSG::INFO << "Finalizing KSKK vs Kpi Double Tagging" << endreq;
+  log << MSG::INFO << "Finalizing KSKK vs Kpipi0 Double Tagging" << endreq;
   return StatusCode::SUCCESS;
 }
 
-StatusCode KSKKVersusKpiDoubleTag::FillTuple(DTagToolIterator DTTool_Signal_iter, DTagToolIterator DTTool_Tag_iter, DTagTool &DTTool) {
+StatusCode KSKKVersusKpipi0DoubleTag::FillTuple(DTagToolIterator DTTool_Signal_iter, DTagToolIterator DTTool_Tag_iter, DTagTool &DTTool) {
   if(m_RunNumber < 0) {
     SmartDataPtr<Event::McParticleCol> MCParticleCol(eventSvc(), "/Event/MC/McParticleCol");
     if(!MCParticleCol) {
