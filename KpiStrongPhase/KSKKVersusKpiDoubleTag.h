@@ -1,8 +1,8 @@
-// Martin Duy Tat 5th March 2021
+// Martin Duy Tat 17th May 2021
 /**
  * KSKKVersusKpiDoubleTag is a class for a BOSS algorithm
  * It runs over \f$D^0\bar{D^0}\f$ data and saves all events with a double \f$D\to K_S^0K^+K^-\pi^+\pi^-\f$ vs \f$D^0\to K\pi\f$ tag
- * It also runs a fit for the decay \f$K_S^0\to\pi^+\pi^-\f$ by refitting the primary and secondary vertex in the class FindKS, from this the flight significance is used to eliminate peaking background
+ * It also runs a fit for the decay \f$K_S^0\to K^+K^-\f$ by refitting the primary and secondary vertex in the class FindKS, from this the flight significance is used to eliminate peaking background
  * A kinematic fit of $K_S^0K^+K^-$ is done to get more accurate momenta for binning
  */
 

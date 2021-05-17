@@ -39,7 +39,7 @@
 // ROOT
 #include "TMath.h"
 // Particle masses
-#include "KpiStrongPhases/ParticleMasses.h"
+#include "KpiStrongPhase/ParticleMasses.h"
 
 FindPi0Eta::FindPi0Eta(int npi0eta, std::string Particle): m_Chi2Fit(0.0), m_npi0eta(npi0eta), m_Particle(Particle) {
   m_HighEPhotonP.resize(m_npi0eta);
