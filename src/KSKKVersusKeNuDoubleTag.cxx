@@ -70,18 +70,10 @@ StatusCode KSKKVersusKeNuDoubleTag::initialize() {
       status = m_tuple->addItem("SignalMBC", m_SignalMBC);
       status = m_tuple->addItem("SignalDeltaE", m_SignalDeltaE);
       status = m_tuple->addItem("SignalBeamE", m_SignalBeamE);
-      status = m_tuple->addItem("TagDMass", m_TagDMass);
-      status = m_tuple->addItem("TagMBC", m_TagMBC);
-      status = m_tuple->addItem("TagDeltaE", m_TagDeltaE);
-      status = m_tuple->addItem("TagBeamE", m_TagBeamE);
       status = m_tuple->addItem("SignalDpx", m_SignalDpx);
       status = m_tuple->addItem("SignalDpy", m_SignalDpy);
       status = m_tuple->addItem("SignalDpz", m_SignalDpz);
       status = m_tuple->addItem("SignalDenergy", m_SignalDenergy);
-      status = m_tuple->addItem("TagDpx", m_TagDpx);
-      status = m_tuple->addItem("TagDpy", m_TagDpy);
-      status = m_tuple->addItem("TagDpz", m_TagDpz);
-      status = m_tuple->addItem("TagDenergy", m_TagDenergy);
       status = m_tuple->addItem("SignalKSDecayLengthVeeVertex", m_SignalDecayLengthVeeVertex);
       status = m_tuple->addItem("SignalKSChi2VeeVertex", m_SignalChi2VeeVertex);
       status = m_tuple->addItem("SignalKSMassVeeVertex", m_SignalKSMassVeeVertex);
@@ -237,18 +229,10 @@ StatusCode KSKKVersusKeNuDoubleTag::FillTuple(DTagToolIterator DTTool_Signal_ite
   m_SignalMBC = (*DTTool_Signal_iter)->mBC();
   m_SignalDeltaE = (*DTTool_Signal_iter)->deltaE();
   m_SignalBeamE = (*DTTool_Signal_iter)->beamE();
-  m_TagDMass = (*DTTool_Tag_iter)->mass();
-  m_TagMBC = (*DTTool_Tag_iter)->mBC();
-  m_TagDeltaE = (*DTTool_Tag_iter)->deltaE();
-  m_TagBeamE = (*DTTool_Tag_iter)->beamE();
   m_SignalDpx = (*DTTool_Signal_iter)->p4().x();
   m_SignalDpy = (*DTTool_Signal_iter)->p4().y();
   m_SignalDpz = (*DTTool_Signal_iter)->p4().z();
   m_SignalDenergy = (*DTTool_Signal_iter)->p4().t();
-  m_TagDpx = (*DTTool_Tag_iter)->p4().x();
-  m_TagDpy = (*DTTool_Tag_iter)->p4().y();
-  m_TagDpz = (*DTTool_Tag_iter)->p4().z();
-  m_TagDenergy = (*DTTool_Tag_iter)->p4().t();
   FindKSKKTagInfo findKSKKTagInfo;
   StatusCode status = findKSKKTagInfo.CalculateTagInfo(DTTool_Signal_iter, DTTool);
   if(status != StatusCode::SUCCESS) {
