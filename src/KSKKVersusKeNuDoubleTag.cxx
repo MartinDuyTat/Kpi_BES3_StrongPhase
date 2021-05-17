@@ -194,6 +194,12 @@ StatusCode KSKKVersusKeNuDoubleTag::finalize() {
 }
 
 StatusCode KSKKVersusKeNuDoubleTag::FillTuple(DTagToolIterator DTTool_Signal_iter, DTagTool &DTTool) {
+  // First check if there are any KeNu candidates, otherwise no point in saving all the other stuff
+  FindKeNuTagInfo findKeNuTagInfo;
+  StatusCode KeNuStatus = findKeNuTagInfo.findKeNuTagInfo(DTTool_Signal_iter, DTTool);
+  if(KeNuStatus == StatusCode::FAILURE) {
+    return StatusCode::RECOVERABLE;
+  }
   if(m_RunNumber < 0) {
     SmartDataPtr<Event::McParticleCol> MCParticleCol(eventSvc(), "/Event/MC/McParticleCol");
     if(!MCParticleCol) {
