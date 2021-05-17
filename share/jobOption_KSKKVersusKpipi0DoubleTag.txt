@@ -1,0 +1,4 @@
+#include "$MCDECAYMODESVCROOT/share/GetDecayMode.txt"
+#include "$EVENTWRITERROOT/share/jobOptions_EventWriter.txt"
+ApplicationMgr.DLLs += {"KpiStrongPhase"};
+ApplicationMgr.TopAlg += {"KSKKVersusKpipi0DoubleTag"};

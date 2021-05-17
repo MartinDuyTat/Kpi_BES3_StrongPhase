@@ -16,6 +16,9 @@
 
 KpiStrongPhase::KpiStrongPhase(const std::string& name, ISvcLocator* pSvcLocator): Algorithm(name, pSvcLocator) {
   declareProperty("KSKKVersusKpiDoubleTag", m_recKSKKVersusKpiTag = true);
+  declareProperty("KSKKVersusKpipi0DoubleTag", m_recKSKKVersusKpipi0Tag = true);
+  declareProperty("KSKKVersusKpipipiDoubleTag", m_recKSKKVersusKpipipiTag = true);
+  declareProperty("KSKKVersusKeNuDoubleTag", m_recKSKKVersusKeNuTag = true);
 }
 
 KpiStrongPhase::~KpiStrongPhase() {
@@ -29,6 +32,27 @@ StatusCode KpiStrongPhase::initialize() {
     sc = createSubAlgorithm("KSKKVersusKpiDoubleTag", "KSKKVersusKpiDoubleTag", m_KSKKVersusKpiTag);
     if(sc.isFailure()) {
       log << MSG::ERROR << "Error while creating KSKKVersusKpiDoubleTag" << endreq;
+      return StatusCode::FAILURE;
+    }
+  }
+  if(m_recKSKKVersusKpipi0Tag) {
+    sc = createSubAlgorithm("KSKKVersusKpipi0DoubleTag", "KSKKVersusKpipi0DoubleTag", m_KSKKVersusKpipi0Tag);
+    if(sc.isFailure()) {
+      log << MSG::ERROR << "Error while creating KSKKVersusKpipi0DoubleTag" << endreq;
+      return StatusCode::FAILURE;
+    }
+  }
+  if(m_recKSKKVersusKpiTag) {
+    sc = createSubAlgorithm("KSKKVersusKpipipiDoubleTag", "KSKKVersusKpipipiDoubleTag", m_KSKKVersusKpipipiTag);
+    if(sc.isFailure()) {
+      log << MSG::ERROR << "Error while creating KSKKVersusKpipipiDoubleTag" << endreq;
+      return StatusCode::FAILURE;
+    }
+  }
+  if(m_recKSKKVersusKeNuTag) {
+    sc = createSubAlgorithm("KSKKVersusKeNuDoubleTag", "KSKKVersusKeNuDoubleTag", m_KSKKVersusKeNuTag);
+    if(sc.isFailure()) {
+      log << MSG::ERROR << "Error while creating KSKKVersusKeNuDoubleTag" << endreq;
       return StatusCode::FAILURE;
     }
   }
