@@ -20,6 +20,8 @@ KpiStrongPhase::KpiStrongPhase(const std::string& name, ISvcLocator* pSvcLocator
   declareProperty("KSKKVersusKpipipiDoubleTag", m_recKSKKVersusKpipipiTag = true);
   declareProperty("KSKKVersusKeNuDoubleTag", m_recKSKKVersusKeNuTag = true);
   declareProperty("KLKKVersusKpiDoubleTag", m_recKLKKVersusKpiTag = true);
+  declareProperty("KLKKVersusKpipi0DoubleTag", m_recKLKKVersusKpipi0Tag = true);
+  declareProperty("KLKKVersusKpipipiDoubleTag", m_recKLKKVersusKpipipiTag = true);
 }
 
 KpiStrongPhase::~KpiStrongPhase() {
