@@ -64,6 +64,20 @@ StatusCode KpiStrongPhase::initialize() {
       return StatusCode::FAILURE;
     }
   }
+  if(m_recKLKKVersusKpipi0Tag) {
+    sc = createSubAlgorithm("KLKKVersusKpipi0DoubleTag", "KLKKVersusKpipi0DoubleTag", m_KLKKVersusKpipi0Tag);
+    if(sc.isFailure()) {
+      log << MSG::ERROR << "Error while creating KLKKVersusKpipi0DoubleTag" << endreq;
+      return StatusCode::FAILURE;
+    }
+  }
+  if(m_recKLKKVersusKpiTag) {
+    sc = createSubAlgorithm("KLKKVersusKpipipiDoubleTag", "KLKKVersusKpipipiDoubleTag", m_KLKKVersusKpipipiTag);
+    if(sc.isFailure()) {
+      log << MSG::ERROR << "Error while creating KLKKVersusKpipipiDoubleTag" << endreq;
+      return StatusCode::FAILURE;
+    }
+  }
 }
 
 StatusCode KpiStrongPhase::execute() {

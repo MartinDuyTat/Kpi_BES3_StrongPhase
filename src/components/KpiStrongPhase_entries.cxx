@@ -5,6 +5,8 @@
 #include "KpiStrongPhase/KSKKVersusKpipipiDoubleTag.h"
 #include "KpiStrongPhase/KSKKVersusKeNuDoubleTag.h"
 #include "KpiStrongPhase/KLKKVersusKpiDoubleTag.h"
+#include "KpiStrongPhase/KLKKVersusKpipi0DoubleTag.h"
+#include "KpiStrongPhase/KLKKVersusKpipipiDoubleTag.h"
 
 DECLARE_ALGORITHM_FACTORY(KpiStrongPhase)
 DECLARE_ALGORITHM_FACTORY(KSKKVersusKpiDoubleTag)
@@ -12,6 +14,8 @@ DECLARE_ALGORITHM_FACTORY(KSKKVersusKpipi0DoubleTag)
 DECLARE_ALGORITHM_FACTORY(KSKKVersusKpipipiDoubleTag)
 DECLARE_ALGORITHM_FACTORY(KSKKVersusKeNuDoubleTag)
 DECLARE_ALGORITHM_FACTORY(KLKKVersusKpiDoubleTag)
+DECLARE_ALGORITHM_FACTORY(KLKKVersusKpipi0DoubleTag)
+DECLARE_ALGORITHM_FACTORY(KLKKVersusKpipipiDoubleTag)
 
 DECLARE_FACTORY_ENTRIES(KpiStrongPhase) {
   DECLARE_ALGORITHM(KpiStrongPhase)

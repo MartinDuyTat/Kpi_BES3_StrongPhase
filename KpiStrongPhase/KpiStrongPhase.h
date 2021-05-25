@@ -58,6 +58,14 @@ class KpiStrongPhase: public Algorithm {
      */
     Algorithm *m_KLKKVersusKpiTag;
     /**
+     * \f$K_LKK\f$ vs \f$K\pi\pi^0\f$ tag mode
+     */
+    Algorithm *m_KLKKVersusKpipi0Tag;
+    /**
+     * \f$K_LKK\f$ vs \f$K\pi\pi\pi\f$ tag mode
+     */
+    Algorithm *m_KLKKVersusKpipipiTag;
+    /**
      * Turn on \f$K_SKK\f$ vs \f$K\pi\f$ tag mode
      */
     bool m_recKSKKVersusKpiTag;
@@ -77,6 +85,14 @@ class KpiStrongPhase: public Algorithm {
      * Turn on \f$K_LKK\f$ vs \f$K\pi\f$ tag mode
      */
     bool m_recKLKKVersusKpiTag;
+    /**
+     * Turn on \f$K_LKK\f$ vs \f$K\pi\pi^0\f$ tag mode
+     */
+    bool m_recKLKKVersusKpipi0Tag;
+    /**
+     * Turn on \f$K_LKK\f$ vs \f$K\pi\pi\pi\f$ tag mode
+     */
+    bool m_recKLKKVersusKpipipiTag;
 };
 
 #endif
