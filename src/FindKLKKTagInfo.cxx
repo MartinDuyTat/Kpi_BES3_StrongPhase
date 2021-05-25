@@ -223,6 +223,10 @@ double FindKLKKTagInfo::GetKLongP(int i) const {
   return m_KLongP[i];
 }
 
+double FindKLKKTagInfo::GetMMiss2() const {
+  return m_KLongP.M2();
+}
+
 double FindKLKKTagInfo::GetKPlusPKalmanFit(int i) const {
   return m_KPlusPKalmanFit[i];
 }

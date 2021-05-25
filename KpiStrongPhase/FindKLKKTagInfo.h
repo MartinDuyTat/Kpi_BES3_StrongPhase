@@ -47,6 +47,10 @@ class FindKLKKTagInfo {
      */
     double GetKLongP(int i) const;
     /**
+     * Get missing mass squared
+     */
+    double GetMMiss2() const;
+    /**
      * Get flag of Kalman fit success
      */
     int GetKalmanFitSuccess() const;
