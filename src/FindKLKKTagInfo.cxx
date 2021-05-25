@@ -34,7 +34,7 @@
 // ROOT
 #include "TMath.h"
 
-FindKLKKTagInfo::FindKLKKTagInfo(): m_KalmanFitSuccess(0), m_KalmanFitChi2(0), m_NearestShowerEnergy(0.0), m_NearestShowerCosAngle(0.0) {
+FindKLKKTagInfo::FindKLKKTagInfo(): m_KalmanFitSuccess(0), m_KalmanFitChi2(0), m_NearestShowerEnergy(0.0), m_NearestShowerCosAngle(0.0), m_DaughterTrackID(std::vector<int>(2)) {
 }
 
 FindKLKKTagInfo::~FindKLKKTagInfo() {
@@ -60,7 +60,7 @@ StatusCode FindKLKKTagInfo::findKLKKTagInfo(DTagToolIterator DTTool_iter, DTagTo
   }
   // Get tracks on the other side of the reconstructed D meson
   SmartRefVector<EvtRecTrack> OtherTracks = (*DTTool_iter)->otherTracks();
-  // Loop over all tracks on the other side to find pi+ pi-
+  // Loop over all tracks on the other side to find K+ K-
   std::vector<RecMdcKalTrack*> KalmanTracks(2); //In the order K+ K-
   int NumberKPlusTracks = 0, NumberKMinusTracks = 0;
   for(SmartRefVector<EvtRecTrack>::iterator Track_iter = OtherTracks.begin(); Track_iter != OtherTracks.end(); Track_iter++) {
@@ -184,7 +184,7 @@ StatusCode FindKLKKTagInfo::findKLKKTagInfo(DTagToolIterator DTTool_iter, DTagTo
       // EMC shower time requirement 0 <= T <= 14 (in units of 50 ns)
       continue;
     }
-    CLHEP::HepLorentVector PhotonP = KKpipiUtilities::GetPhoton4Vector(EMCShower->energy(), EMCShower->theta(), EMCShower->phi());
+    CLHEP::HepLorentzVector PhotonP = KKpipiUtilities::GetPhoton4Vector(EMCShower->energy(), EMCShower->theta(), EMCShower->phi());
     double CosAngle = PhotonP.vect().unit().dot(m_KLongP.vect().unit());
     if(CosAngle > LargestCosAngle) {
       LargestCosAngle = CosAngle;
