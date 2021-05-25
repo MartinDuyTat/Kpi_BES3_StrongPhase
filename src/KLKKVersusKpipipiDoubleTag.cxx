@@ -278,7 +278,7 @@ StatusCode KLKKVersusKpipipiDoubleTag::FillTuple(DTagToolIterator DTTool_Tag_ite
     m_SignalKMinusTrueID = ReconstructedPID[1];
   }
   FindKpipipiTagInfo findKpipipiTagInfo;
-  status = findKpipipiTagInfo.CalculateTagInfo(DTTool_Tag_iter, DTTool);
+  Statuscode status = findKpipipiTagInfo.CalculateTagInfo(DTTool_Tag_iter, DTTool);
   if(status != StatusCode::SUCCESS) {
     return status;
   }

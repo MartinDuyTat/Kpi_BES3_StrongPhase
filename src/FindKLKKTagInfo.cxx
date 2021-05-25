@@ -195,11 +195,14 @@ StatusCode FindKLKKTagInfo::findKLKKTagInfo(DTagToolIterator DTTool_iter, DTagTo
   // Do a Kalman fit of the KL K+ K- daughters
   WTrackParameter WTrackKplus(MASS::K_MASS, KalmanTracks[0]->getZHelix(), KalmanTracks[0]->getZError());
   WTrackParameter WTrackKminus(MASS::K_MASS, KalmanTracks[1]->getZHelix(), KalmanTracks[1]->getZError());
+  WTrackParameter WTrackKLong(m_KLongP, m_KLongP.phi(), m_KLongP.theta(), m_KLongP.t());
+  WTrackKLong.setCharge(0);
+  WTrackKLong.setMass(MASS::KS_MASS);
   KalmanKinematicFit *KalmanFit = KalmanKinematicFit::instance();
   KalmanFit->init();
   KalmanFit->AddTrack(0, WTrackKplus);
   KalmanFit->AddTrack(1, WTrackKminus);
-  KalmanFit->AddMissTrack(2, MASS::KS_MASS, m_KLongP);
+  KalmanFit->AddTrack(2, WTRackKLong);
   KalmanFit->AddResonance(0, MASS::D_MASS, 0, 1, 2);
   m_KalmanFitSuccess = KalmanFit->Fit();
   if(m_KalmanFitSuccess) {
