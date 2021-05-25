@@ -202,7 +202,7 @@ StatusCode FindKLKKTagInfo::findKLKKTagInfo(DTagToolIterator DTTool_iter, DTagTo
   KalmanFit->init();
   KalmanFit->AddTrack(0, WTrackKplus);
   KalmanFit->AddTrack(1, WTrackKminus);
-  KalmanFit->AddTrack(2, WTRackKLong);
+  KalmanFit->AddTrack(2, WTrackKLong);
   KalmanFit->AddResonance(0, MASS::D_MASS, 0, 1, 2);
   m_KalmanFitSuccess = KalmanFit->Fit();
   if(m_KalmanFitSuccess) {
