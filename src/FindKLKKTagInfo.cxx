@@ -3,7 +3,7 @@
 // KpiStrongPhase
 #include "KpiStrongPhase/FindKLKKTagInfo.h"
 #include "KpiStrongPhase/ParticleMasses.h"
-#include "KpiStrongPhase/KpiStrongPhaseUtilities.h"
+#include "KpiStrongPhase/KKpipiUtilities.h"
 // Gaudi
 #include "GaudiKernel/Bootstrap.h"
 #include "GaudiKernel/IDataProviderSvc.h"
@@ -40,7 +40,7 @@ FindKLKKTagInfo::FindKLKKTagInfo(): m_KalmanFitSuccess(0), m_KalmanFitChi2(0), m
 FindKLKKTagInfo::~FindKLKKTagInfo() {
 }
 
-StatusCode FindKLKKTagInfo::findKL(DTagToolIterator DTTool_iter, DTagTool DTTool) {
+StatusCode FindKLKKTagInfo::findKLKKTagInfo(DTagToolIterator DTTool_iter, DTagTool DTTool) {
   // Prepare message service
   IMessageSvc *msgSvc;
   Gaudi::svcLocator()->service("MessageSvc", msgSvc);
@@ -184,8 +184,8 @@ StatusCode FindKLKKTagInfo::findKL(DTagToolIterator DTTool_iter, DTagTool DTTool
       // EMC shower time requirement 0 <= T <= 14 (in units of 50 ns)
       continue;
     }
-    double PhotonP = KKpipiUtilities::GetPhoton4Vector(EMCShower->energy(), EMCShower->theta(), EMCShower->phi());
-    double CosAngle = PhotonP.vect().unit().dot(m_KLong.vect().unit());
+    CLHEP::HepLorentVector PhotonP = KKpipiUtilities::GetPhoton4Vector(EMCShower->energy(), EMCShower->theta(), EMCShower->phi());
+    double CosAngle = PhotonP.vect().unit().dot(m_KLongP.vect().unit());
     if(CosAngle > LargestCosAngle) {
       LargestCosAngle = CosAngle;
       m_NearestShowerEnergy = PhotonP[3];
@@ -224,7 +224,7 @@ double FindKLKKTagInfo::GetKLongP(int i) const {
 }
 
 double FindKLKKTagInfo::GetMMiss2() const {
-  return m_KLongP.M2();
+  return m_KLongP.m2();
 }
 
 double FindKLKKTagInfo::GetKPlusPKalmanFit(int i) const {
@@ -253,4 +253,8 @@ double FindKLKKTagInfo::GetNearestShowerEnergy() const {
 
 double FindKLKKTagInfo::GetNearestShowerCosAngle() const {
   return m_NearestShowerCosAngle;
+}
+
+std::vector<int> FindKLKKTagInfo::GetDaughterTrackID() const {
+  return m_DaughterTrackID;
 }
