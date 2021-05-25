@@ -176,7 +176,6 @@ StatusCode KSKKVersusKeNuDoubleTag::execute() {
     StatusCode FillTupleStatus = FillTuple(DTTool_Signal_iter, DTTool);
     if(FillTupleStatus != StatusCode::SUCCESS) {
       if(FillTupleStatus == StatusCode::RECOVERABLE) {
-	log << MSG::WARNING << "Vertex fit of KS failed, skipping event" << endreq;
 	return StatusCode::SUCCESS;
       }
       log << MSG::FATAL << "Assigning KSKK vs KeNu tuple info failed" << endreq;
