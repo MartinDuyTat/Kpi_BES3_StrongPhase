@@ -68,26 +68,24 @@ StatusCode FindKLKKTagInfo::findKLKKTagInfo(DTagToolIterator DTTool_iter, DTagTo
     if(!(*Track_iter)->isMdcTrackValid() || !(*Track_iter)->isMdcKalTrackValid()) {
       continue;
     }
-    if(DTTool.isGoodTrack(*Track_iter)) {
-      if(DTTool.isKaon(*Track_iter)) {
-	RecMdcKalTrack *MDCKalTrack = (*Track_iter)->mdcKalTrack();
-	MDCKalTrack->setPidType(RecMdcKalTrack::kaon);
-	if(MDCKalTrack->charge() == +1) {
-	  NumberKPlusTracks++;
-	  m_KPlusP = MDCKalTrack->p4(MASS::K_MASS);
-	  KalmanTracks[0] = MDCKalTrack;
-	  m_DaughterTrackID[0] = (*Track_iter)->trackId();
-	} else if(MDCKalTrack->charge() == -1) {
-	  NumberKMinusTracks++;
-	  m_KMinusP = MDCKalTrack->p4(MASS::K_MASS);
-	  KalmanTracks[1] = MDCKalTrack;
-	  m_DaughterTrackID[1] = (*Track_iter)->trackId();
-	} else {
-	  return StatusCode::FAILURE;
-	}
+    if(DTTool.isKaon(*Track_iter)) {
+      RecMdcKalTrack *MDCKalTrack = (*Track_iter)->mdcKalTrack();
+      MDCKalTrack->setPidType(RecMdcKalTrack::kaon);
+      if(MDCKalTrack->charge() == +1) {
+	NumberKPlusTracks++;
+	m_KPlusP = MDCKalTrack->p4(MASS::K_MASS);
+	KalmanTracks[0] = MDCKalTrack;
+	m_DaughterTrackID[0] = (*Track_iter)->trackId();
+      } else if(MDCKalTrack->charge() == -1) {
+	NumberKMinusTracks++;
+	m_KMinusP = MDCKalTrack->p4(MASS::K_MASS);
+	KalmanTracks[1] = MDCKalTrack;
+	m_DaughterTrackID[1] = (*Track_iter)->trackId();
       } else {
 	return StatusCode::FAILURE;
       }
+    } else {
+      return StatusCode::FAILURE;
     }
   }
   // If K+ K- pair is not found, reject event
