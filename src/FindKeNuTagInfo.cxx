@@ -53,23 +53,21 @@ StatusCode FindKeNuTagInfo::findKeNuTagInfo(DTagToolIterator DTTool_iter, DTagTo
     if(!(*Track_iter)->isMdcTrackValid() || !(*Track_iter)->isMdcKalTrackValid()) {
       continue;
     }
-    if(DTTool.isGoodTrack(*Track_iter)) {
-      RecMdcKalTrack *MDCKalTrack = (*Track_iter)->mdcKalTrack();
-      if(DTTool.isElectron(*Track_iter)) {
-	MDCKalTrack->setPidType(RecMdcKalTrack::electron);
-	m_ElectronP = MDCKalTrack->p4(MASS::ELECTRON_MASS);
-	m_ElectronCharge = MDCKalTrack->charge();
-	m_DaughterTrackID[1] = (*Track_iter)->trackId();
-	NumberElectronTracks++;
-      } else if(DTTool.isKaon(*Track_iter)) {
-	MDCKalTrack->setPidType(RecMdcKalTrack::kaon);
-	m_KaonP = MDCKalTrack->p4(MASS::K_MASS);
-	m_KaonCharge = MDCKalTrack->charge();
-	m_DaughterTrackID[0] = (*Track_iter)->trackId();
-	NumberKaonTracks++;
-      } else {
-	return StatusCode::FAILURE;
-      }
+    RecMdcKalTrack *MDCKalTrack = (*Track_iter)->mdcKalTrack();
+    if(DTTool.isElectron(*Track_iter)) {
+      MDCKalTrack->setPidType(RecMdcKalTrack::electron);
+      m_ElectronP = MDCKalTrack->p4(MASS::ELECTRON_MASS);
+      m_ElectronCharge = MDCKalTrack->charge();
+      m_DaughterTrackID[1] = (*Track_iter)->trackId();
+      NumberElectronTracks++;
+    } else if(DTTool.isKaon(*Track_iter)) {
+      MDCKalTrack->setPidType(RecMdcKalTrack::kaon);
+      m_KaonP = MDCKalTrack->p4(MASS::K_MASS);
+      m_KaonCharge = MDCKalTrack->charge();
+      m_DaughterTrackID[0] = (*Track_iter)->trackId();
+      NumberKaonTracks++;
+    } else {
+      return StatusCode::FAILURE;
     }
   }
   // If more than one electron or kaon is found, or if their charges are not opposite, skip event
