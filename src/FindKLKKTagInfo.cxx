@@ -119,6 +119,12 @@ StatusCode FindKLKKTagInfo::findKLKKTagInfo(DTagToolIterator DTTool_iter, DTagTo
     // Get EM shower four-momenta of photons
     RecEmcShower *HighEPhotonShower = HighEnergyPhotonTrack->emcShower();
     RecEmcShower *LowEPhotonShower = LowEnergyPhotonTrack->emcShower();
+    CLHEP::HepLorentzVector HighEPhotonP[i] = KKpipiUtilities::GetPhoton4Vector(HighEPhotonShower->energy(), HighEPhotonShower->theta(), HighEPhotonShower->phi());
+    CLHEP::HepLorentzVector LowEPhotonP[i] = KKpipiUtilities::GetPhoton4Vector(LowEPhotonShower->energy(), LowEPhotonShower->theta(), LowEPhotonShower->phi());
+    double Mgammagamma = (HighEPhotonP + LowEPhotonP).m();
+    if(Mgammagamma < 0.110 || Mgammagamma > 0.155) {
+      continue;
+    }
     // Get photon track ID
     int HighEnergyPhotonTrackID = HighEnergyPhotonTrack->trackId();
     int LowEnergyPhotonTrackID = LowEnergyPhotonTrack->trackId();
@@ -133,7 +139,7 @@ StatusCode FindKLKKTagInfo::findKLKKTagInfo(DTagToolIterator DTTool_iter, DTagTo
     }
     NumberPi0++;
   }
-  // If there are no pi0, reject event
+  // If there are additional pi0, reject event
   if(NumberPi0 != 0) {
     return StatusCode::FAILURE;
   }
@@ -146,6 +152,12 @@ StatusCode FindKLKKTagInfo::findKLKKTagInfo(DTagToolIterator DTTool_iter, DTagTo
     // Get EM shower four-momenta of photons
     RecEmcShower *HighEPhotonShower = HighEnergyPhotonTrack->emcShower();
     RecEmcShower *LowEPhotonShower = LowEnergyPhotonTrack->emcShower();
+    CLHEP::HepLorentzVector HighEPhotonP[i] = KKpipiUtilities::GetPhoton4Vector(HighEPhotonShower->energy(), HighEPhotonShower->theta(), HighEPhotonShower->phi());
+    CLHEP::HepLorentzVector LowEPhotonP[i] = KKpipiUtilities::GetPhoton4Vector(LowEPhotonShower->energy(), LowEPhotonShower->theta(), LowEPhotonShower->phi());
+    double Mgammagamma = (HighEPhotonP + LowEPhotonP).m();
+    if(Mgammagamma < 0.480 || Mgammagamma > 0.580) {
+      continue;
+    }
     // Get photon track ID
     int HighEnergyPhotonTrackID = HighEnergyPhotonTrack->trackId();
     int LowEnergyPhotonTrackID = LowEnergyPhotonTrack->trackId();
@@ -159,6 +171,10 @@ StatusCode FindKLKKTagInfo::findKLKKTagInfo(DTagToolIterator DTTool_iter, DTagTo
       }
     }
     NumberEta++;
+  }
+  // If there are additional eta, reject event
+  if(NumberEta != 0) {
+    return StatusCode::FAILURE;
   }
   // Get showers on the other side of the reconstructed D meson
   SmartRefVector<EvtRecTrack> OtherShowers = (*DTTool_iter)->otherShowers();
