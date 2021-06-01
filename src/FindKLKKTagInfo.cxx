@@ -119,8 +119,8 @@ StatusCode FindKLKKTagInfo::findKLKKTagInfo(DTagToolIterator DTTool_iter, DTagTo
     // Get EM shower four-momenta of photons
     RecEmcShower *HighEPhotonShower = HighEnergyPhotonTrack->emcShower();
     RecEmcShower *LowEPhotonShower = LowEnergyPhotonTrack->emcShower();
-    CLHEP::HepLorentzVector HighEPhotonP[i] = KKpipiUtilities::GetPhoton4Vector(HighEPhotonShower->energy(), HighEPhotonShower->theta(), HighEPhotonShower->phi());
-    CLHEP::HepLorentzVector LowEPhotonP[i] = KKpipiUtilities::GetPhoton4Vector(LowEPhotonShower->energy(), LowEPhotonShower->theta(), LowEPhotonShower->phi());
+    CLHEP::HepLorentzVector HighEPhotonP = KKpipiUtilities::GetPhoton4Vector(HighEPhotonShower->energy(), HighEPhotonShower->theta(), HighEPhotonShower->phi());
+    CLHEP::HepLorentzVector LowEPhotonP = KKpipiUtilities::GetPhoton4Vector(LowEPhotonShower->energy(), LowEPhotonShower->theta(), LowEPhotonShower->phi());
     double Mgammagamma = (HighEPhotonP + LowEPhotonP).m();
     if(Mgammagamma < 0.110 || Mgammagamma > 0.155) {
       continue;
@@ -152,8 +152,8 @@ StatusCode FindKLKKTagInfo::findKLKKTagInfo(DTagToolIterator DTTool_iter, DTagTo
     // Get EM shower four-momenta of photons
     RecEmcShower *HighEPhotonShower = HighEnergyPhotonTrack->emcShower();
     RecEmcShower *LowEPhotonShower = LowEnergyPhotonTrack->emcShower();
-    CLHEP::HepLorentzVector HighEPhotonP[i] = KKpipiUtilities::GetPhoton4Vector(HighEPhotonShower->energy(), HighEPhotonShower->theta(), HighEPhotonShower->phi());
-    CLHEP::HepLorentzVector LowEPhotonP[i] = KKpipiUtilities::GetPhoton4Vector(LowEPhotonShower->energy(), LowEPhotonShower->theta(), LowEPhotonShower->phi());
+    CLHEP::HepLorentzVector HighEPhotonP = KKpipiUtilities::GetPhoton4Vector(HighEPhotonShower->energy(), HighEPhotonShower->theta(), HighEPhotonShower->phi());
+    CLHEP::HepLorentzVector LowEPhotonP = KKpipiUtilities::GetPhoton4Vector(LowEPhotonShower->energy(), LowEPhotonShower->theta(), LowEPhotonShower->phi());
     double Mgammagamma = (HighEPhotonP + LowEPhotonP).m();
     if(Mgammagamma < 0.480 || Mgammagamma > 0.580) {
       continue;
