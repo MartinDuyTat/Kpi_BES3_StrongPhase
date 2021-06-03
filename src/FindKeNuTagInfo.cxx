@@ -44,6 +44,9 @@ StatusCode FindKeNuTagInfo::findKeNuTagInfo(DTagToolIterator DTTool_iter, DTagTo
   IMessageSvc *msgSvc;
   Gaudi::svcLocator()->service("MessageSvc", msgSvc);
   MsgStream log(msgSvc, "FindKeNuTagInfo");
+  // Prepare event data service
+  IDataProviderSvc *EventDataService = nullptr;
+  Gaudi::svcLocator()->service("EventDataSvc", EventDataService);
   // Prepare pi0 service
   SmartDataPtr<EvtRecPi0Col> evtRecPi0Col(EventDataService, "/Event/EvtRec/EvtRecPi0Col");
   if(!evtRecPi0Col) {
@@ -126,7 +129,7 @@ StatusCode FindKeNuTagInfo::findKeNuTagInfo(DTagToolIterator DTTool_iter, DTagTo
     double Phi;
     double Angle;
     // Get angle to nearest charged track
-    KKpipiUtilities::GetPhotonAngularSeparation(EMCPosition, Angle, Theta, Phi)
+    KKpipiUtilities::GetPhotonAngularSeparation(EMCPosition, Angle, Theta, Phi);
     if(Angle < m_NearestShowerAngle) {
       m_NearestShowerAngle = Angle;
     }
@@ -181,15 +184,15 @@ double FindKeNuTagInfo::GetUMiss() const {
   return m_UMiss;
 }
 
-int GetNumberPi0() const {
+int FindKeNuTagInfo::GetNumberPi0() const {
   return m_NumberPi0;
 }
 
-double GetNearestShowerAngle() const {
+double FindKeNuTagInfo::GetNearestShowerAngle() const {
   return m_NearestShowerAngle;
 }
 
-double GetMaximumShowerEnergy() const {
+double FindKeNuTagInfo::GetMaximumShowerEnergy() const {
   return m_MaximumShowerEnergy;
 }
 
