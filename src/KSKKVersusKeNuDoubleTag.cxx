@@ -141,6 +141,9 @@ StatusCode KSKKVersusKeNuDoubleTag::initialize() {
       status = m_tuple->addItem("TagMissingpz", m_TagMissingpz);
       status = m_tuple->addItem("TagMissingenergy", m_TagMissingenergy);
       status = m_tuple->addItem("TagUMiss", m_TagUMiss);
+      status = m_tuple->addItem("TagNumberPi0", m_TagNumberPi0);
+      status = m_tuple->addItem("TagNearestShowerAngle", m_TagNearestShowerAngle);
+      status = m_tuple->addItem("TagMaximumShowerEnergy", m_TagMaximumShowerEnergy);
       status = m_tuple->addItem("TagNumberGamma", m_TagNumberGamma, 0, 100);
       status = m_tuple->addIndexedItem("TagExtraShowerEnergy", m_TagNumberGamma, m_TagExtraShowerEnergy);
       status = m_tuple->addItem("TagIsSameDMother", m_TagIsSameDMother);
@@ -316,6 +319,9 @@ StatusCode KSKKVersusKeNuDoubleTag::FillTuple(DTagToolIterator DTTool_Signal_ite
   m_TagMissingpz = findKeNuTagInfo.GetMissP(2);
   m_TagMissingenergy = findKeNuTagInfo.GetMissP(3);
   m_TagUMiss = findKeNuTagInfo.GetUMiss();
+  m_TagNumberPi0 = findKeNuTagInfo.GetNumberPi0();
+  m_TagNearestShowerAngle = findKeNuTagInfo.GetNearestShowerAngle();
+  m_TagMaximumShowerEnergy = findKeNuTagInfo.GetMaximumShowerEnergy();
   m_TagNumberGamma = findKeNuTagInfo.GetNumberGamma();
   for(int j = 0; j < m_TagNumberGamma; j++) {
     m_TagExtraShowerEnergy[j] = findKeNuTagInfo.GetExtraShowerEnergy(j);

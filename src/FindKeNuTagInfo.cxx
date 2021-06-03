@@ -44,6 +44,11 @@ StatusCode FindKeNuTagInfo::findKeNuTagInfo(DTagToolIterator DTTool_iter, DTagTo
   IMessageSvc *msgSvc;
   Gaudi::svcLocator()->service("MessageSvc", msgSvc);
   MsgStream log(msgSvc, "FindKeNuTagInfo");
+  // Prepare pi0 service
+  SmartDataPtr<EvtRecPi0Col> evtRecPi0Col(EventDataService, "/Event/EvtRec/EvtRecPi0Col");
+  if(!evtRecPi0Col) {
+    log << MSG::ERROR << "EvtRecPi0Col not found" << endreq;
+  }
   // Get tracks on the other side of the reconstructed D meson
   SmartRefVector<EvtRecTrack> OtherTracks = (*DTTool_iter)->otherTracks();
   // Loop over all tracks on the other side to find pi+ pi-
@@ -74,9 +79,28 @@ StatusCode FindKeNuTagInfo::findKeNuTagInfo(DTagToolIterator DTTool_iter, DTagTo
   if(NumberElectronTracks != 1 || NumberKaonTracks != 1 || m_ElectronCharge*m_KaonCharge != -1) {
     return StatusCode::FAILURE;
   }
+  // Look for pi0
+  m_NumberPi0 = 0;
+  for(EvtRecPi0Col::iterator Pi0_iter = evtRecPi0Col->begin(); Pi0_iter != evtRecPi0Col->end(); Pi0_iter++) {
+    // Get photon tracks...?
+    EvtRecTrack *HighEnergyPhotonTrack = const_cast<EvtRecTrack*>((*Pi0_iter)->hiEnGamma());
+    EvtRecTrack *LowEnergyPhotonTrack = const_cast<EvtRecTrack*>((*Pi0_iter)->loEnGamma());
+    // Get EM shower four-momenta of photons
+    RecEmcShower *HighEPhotonShower = HighEnergyPhotonTrack->emcShower();
+    RecEmcShower *LowEPhotonShower = LowEnergyPhotonTrack->emcShower();
+    CLHEP::HepLorentzVector HighEPhotonP = KKpipiUtilities::GetPhoton4Vector(HighEPhotonShower->energy(), HighEPhotonShower->theta(), HighEPhotonShower->phi());
+    CLHEP::HepLorentzVector LowEPhotonP = KKpipiUtilities::GetPhoton4Vector(LowEPhotonShower->energy(), LowEPhotonShower->theta(), LowEPhotonShower->phi());
+    double Mgammagamma = (HighEPhotonP + LowEPhotonP).m();
+    if(Mgammagamma < 0.110 || Mgammagamma > 0.155) {
+      continue;
+    }
+    m_NumberPi0++;
+  }
   // Get showers on the other side of the reconstructed D meson
   SmartRefVector<EvtRecTrack> OtherShowers = (*DTTool_iter)->otherShowers();
   // Loop over all showers to find FSR photons
+  m_NearestShowerAngle = 2*TMath::Pi();
+  m_MaximumShowerEnergy = 0.0;
   for(SmartRefVector<EvtRecTrack>::iterator Shower_iter = OtherShowers.begin(); Shower_iter != OtherShowers.end(); Shower_iter++) {
     // Check if shower is valid
     if(!(*Shower_iter)->isEmcShowerValid()) {
@@ -101,9 +125,10 @@ StatusCode FindKeNuTagInfo::findKeNuTagInfo(DTagToolIterator DTTool_iter, DTagTo
     double Theta;
     double Phi;
     double Angle;
-    // If the nearest charged track is separated by less than 20 degrees from the shower, skip event
-    if(!KKpipiUtilities::GetPhotonAngularSeparation(EMCPosition, Angle, Theta, Phi) || Angle < 20.0*TMath::Pi()/180.0) {
-      continue;
+    // Get angle to nearest charged track
+    KKpipiUtilities::GetPhotonAngularSeparation(EMCPosition, Angle, Theta, Phi)
+    if(Angle < m_NearestShowerAngle) {
+      m_NearestShowerAngle = Angle;
     }
     // Get four-momentum of shower
     CLHEP::HepLorentzVector ShowerP = KKpipiUtilities::GetPhoton4Vector(EMCShower->energy(), EMCShower->theta(), EMCShower->phi());
@@ -114,7 +139,11 @@ StatusCode FindKeNuTagInfo::findKeNuTagInfo(DTagToolIterator DTTool_iter, DTagTo
       m_FSRP += ShowerP;
     } else {
       // If not, save shower four-momentum for later background study
-      m_ExtraShowerEnergy.push_back(ShowerP.e());
+      double ShowerEnergy = ShowerP.e();
+      m_ExtraShowerEnergy.push_back(ShowerEnergy);
+      if(ShowerEnergy > m_MaximumShowerEnergy) {
+	m_MaximumShowerEnergy = ShowerEnergy;
+      }
       m_NumberGamma++;
     }
   }
@@ -150,6 +179,18 @@ double FindKeNuTagInfo::GetMissP(int i) const {
 
 double FindKeNuTagInfo::GetUMiss() const {
   return m_UMiss;
+}
+
+int GetNumberPi0() const {
+  return m_NumberPi0;
+}
+
+double GetNearestShowerAngle() const {
+  return m_NearestShowerAngle;
+}
+
+double GetMaximumShowerEnergy() const {
+  return m_MaximumShowerEnergy;
 }
 
 double FindKeNuTagInfo::GetExtraShowerEnergy(int j) const {

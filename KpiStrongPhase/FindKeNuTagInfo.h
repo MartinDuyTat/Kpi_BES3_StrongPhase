@@ -63,6 +63,18 @@ class FindKeNuTagInfo {
      */
     double GetUMiss() const;
     /**
+     * Get number of $\pi^0$ candidates
+     */
+    int GetNumberPi0() const;
+    /**
+     * Get smallest angle between a shower and a charged track
+     */
+    double GetNearestShowerAngle() const;
+    /**
+     * Get maximum shower energy
+     */
+    double GetMaximumShowerEnergy() const;
+    /**
      * Get the energy of the jth photon shower that is not FSR
      */
     double GetExtraShowerEnergy(int j) const;
@@ -103,6 +115,18 @@ class FindKeNuTagInfo {
      * \f$U_\text{miss} = E_\text{miss} - |p_\text{miss}|\f$
      */
     double m_UMiss;
+    /**
+     * Number of $\pi^0$ candidates
+     */
+    int m_NumberPi0;
+    /**
+     * Smallest angle between a shower and a charged track
+     */
+    double m_NearestShowerAngle;
+    /**
+     * Maximum shower energy
+     */
+    double m_MaximumShowerEnergy;
     /**
      * Vector of photon shower energies that is not FSR
      */
