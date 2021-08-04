@@ -54,7 +54,7 @@ StatusCode FindKeNuTagInfo::findKeNuTagInfo(DTagToolIterator DTTool_iter, DTagTo
   }
   // Get tracks on the other side of the reconstructed D meson
   SmartRefVector<EvtRecTrack> OtherTracks = (*DTTool_iter)->otherTracks();
-  // Loop over all tracks on the other side to find pi+ pi-
+  // Loop over all tracks on the other side to find K and e
   int NumberElectronTracks = 0, NumberKaonTracks = 0;
   for(SmartRefVector<EvtRecTrack>::iterator Track_iter = OtherTracks.begin(); Track_iter != OtherTracks.end(); Track_iter++) {
     // First check if track is valid
